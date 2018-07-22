@@ -8,4 +8,7 @@
     <string name="sml">Small</string>
     <string name="med">Medium</string>
     <string name="lrg">Large</string>
+    <string name="circle">Circle</string>
+    <string name="rect">Rect</string>
+    <string name="oval">Oval</string>
 </resources>

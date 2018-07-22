@@ -1,8 +1,13 @@
 package com.example.quentinclayton.paintapp;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import java.util.UUID;
@@ -17,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
     private DrawingView drawView;
     private ImageButton currPaint, drawBtn,eraseBtn, newBtn,saveBtn;
     private float smallBrush, mediumBrush, largeBrush;
+    private Button circle, rectangle, oval;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +41,12 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
 
         drawBtn = (ImageButton)findViewById(R.id.draw_btn);
         drawBtn.setOnClickListener(this);
+
+        circle = (Button)findViewById(R.id.circle);
+
+        rectangle = (Button)findViewById(R.id.Rectangle);
+
+        oval = (Button)findViewById(R.id.oval);
 
         drawView.setBrushSize(mediumBrush);
 
@@ -62,6 +74,30 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
             }
         });
         newDialog.show();
+
+        circle.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                drawView.drawCircle();
+            }
+        });
+
+        oval.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                drawView.drawOval();
+            }
+        });
+
+        rectangle.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                drawView.drawRectangle();
+            }
+        });
     }
     public void paintClicked(View view){
         //use chosen color
@@ -195,4 +231,5 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         }
 
     }
+
 }

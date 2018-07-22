@@ -129,4 +129,16 @@ public class DrawingView extends View {
         drawCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
         invalidate();
     }
+
+    public void drawCircle(){
+        drawCanvas.drawCircle(drawCanvas.getWidth()/2, drawCanvas.getHeight()/2, drawCanvas.getWidth() / 2, drawPaint);
+    }
+
+    public void drawRectangle(){
+        drawCanvas.drawRect(70, 70, drawCanvas.getWidth() - 70, drawCanvas.getHeight() - 70, drawPaint);
+    }
+
+    public void drawOval(){
+        drawCanvas.drawOval(70, 70, drawCanvas.getWidth() - 70, drawCanvas.getHeight() - 70, drawPaint);
+    }
 }
