@@ -45,6 +45,15 @@
             android:onClick="onClick"
             android:text="@string/hex" />
 
+        <Button
+            android:id="@+id/triangle"
+            android:layout_width="69dp"
+            android:layout_height="34dp"
+            android:layout_weight="1"
+            android:onClick="onClick"
+            android:text="@string/triangle" />
+
+
         <ImageButton
             android:id="@+id/new_btn"
             android:layout_width="wrap_content"

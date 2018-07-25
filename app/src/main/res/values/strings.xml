@@ -12,4 +12,5 @@
     <string name="rect">Rect</string>
     <string name="oval">Oval</string>
     <string name="hex">Hexagon</string>
+    <string name="triangle">Triangle</string>
 </resources>
