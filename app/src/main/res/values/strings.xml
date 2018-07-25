@@ -11,4 +11,5 @@
     <string name="circle">Circle</string>
     <string name="rect">Rect</string>
     <string name="oval">Oval</string>
+    <string name="hex">Hexagon</string>
 </resources>

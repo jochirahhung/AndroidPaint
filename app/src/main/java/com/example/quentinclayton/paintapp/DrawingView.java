@@ -1,6 +1,7 @@
 package com.example.quentinclayton.paintapp;
 
 import android.graphics.Color;
+import android.graphics.Region;
 import android.view.View;
 import android.content.Context;
 import android.util.AttributeSet;
@@ -16,7 +17,7 @@ import android.util.TypedValue;
 public class DrawingView extends View {
 
     //drawing path
-    private Path drawPath;
+    private Path drawPath, hexagonPath, hexagonBorderPath;
     //drawing and canvas paint
     private Paint drawPaint, canvasPaint;
     //initial color
@@ -30,6 +31,8 @@ public class DrawingView extends View {
     //erase flag
     private boolean erase=false;
 
+    private float radius;
+
     public DrawingView(Context context, AttributeSet attrs){
         super(context, attrs);
         setupDrawing();
@@ -42,6 +45,8 @@ public class DrawingView extends View {
         brushSize = getResources().getInteger(R.integer.medium_size);
         lastBrushSize = brushSize;
         drawPath = new Path();
+        hexagonPath = new Path();
+        hexagonBorderPath = new Path();
         drawPaint = new Paint();
         drawPaint.setColor(paintColor);
         drawPaint.setAntiAlias(true);
@@ -140,5 +145,40 @@ public class DrawingView extends View {
 
     public void drawOval(){
         drawCanvas.drawOval(70, 70, drawCanvas.getWidth() - 70, drawCanvas.getHeight() - 70, drawPaint);
+    }
+
+    public void calculatePath() {
+        radius = drawCanvas.getWidth()/2;
+        float triangleHeight = (float) (Math.sqrt(3) * radius / 2);
+        float centerX = drawCanvas.getWidth()/2;
+        float centerY = drawCanvas.getHeight()/2;
+        hexagonPath.moveTo(centerX, centerY + radius);
+        hexagonPath.lineTo(centerX - triangleHeight, centerY + radius/2);
+        hexagonPath.lineTo(centerX - triangleHeight, centerY - radius/2);
+        hexagonPath.lineTo(centerX, centerY - radius);
+        hexagonPath.lineTo(centerX + triangleHeight, centerY - radius/2);
+        hexagonPath.lineTo(centerX + triangleHeight, centerY + radius/2);
+        hexagonPath.moveTo(centerX, centerY + radius);
+
+        float radiusBorder = radius - 5;
+        float triangleBorderHeight = (float) (Math.sqrt(3) * radiusBorder / 2);
+        hexagonBorderPath.moveTo(centerX, centerY + radiusBorder);
+        hexagonBorderPath.lineTo(centerX - triangleBorderHeight, centerY + radiusBorder/2);
+        hexagonBorderPath.lineTo(centerX - triangleBorderHeight, centerY - radiusBorder/2);
+        hexagonBorderPath.lineTo(centerX, centerY - radiusBorder);
+        hexagonBorderPath.lineTo(centerX + triangleBorderHeight, centerY - radiusBorder/2);
+        hexagonBorderPath.lineTo(centerX + triangleBorderHeight, centerY + radiusBorder/2);
+        hexagonBorderPath.moveTo(centerX, centerY + radiusBorder);
+        invalidate();
+        drawHexagon();
+    }
+
+    public void drawHexagon(){
+        drawCanvas.clipPath(hexagonBorderPath, Region.Op.DIFFERENCE);
+        drawCanvas.drawColor(Color.WHITE);
+        drawCanvas.save();
+        drawCanvas.clipPath(hexagonPath, Region.Op.DIFFERENCE);
+        drawCanvas.drawColor(paintColor);
+        drawCanvas.save();
     }
 }

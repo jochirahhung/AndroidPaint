@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
     private DrawingView drawView;
     private ImageButton currPaint, drawBtn,eraseBtn, newBtn,saveBtn;
     private float smallBrush, mediumBrush, largeBrush;
-    private Button circle, rectangle, oval;
+    private Button circle, rectangle, oval, hexagon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
         rectangle = (Button)findViewById(R.id.Rectangle);
 
         oval = (Button)findViewById(R.id.oval);
+
+        hexagon = (Button)findViewById(R.id.hexagon);
 
         drawView.setBrushSize(mediumBrush);
 
@@ -96,6 +98,14 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
             @Override
             public void onClick(View v) {
                 drawView.drawRectangle();
+            }
+        });
+
+        hexagon.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                drawView.calculatePath();
             }
         });
     }
